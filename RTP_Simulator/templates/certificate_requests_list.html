@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Certificate Requests</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #002147;
+            color: #fff;
+        }
+
+        header {
+            background-color: #002147;
+            color: white;
+            padding: 20px;
+            text-align: left;
+            margin-left: 150px;
+        }
+
+        main {
+            padding: 20px;
+            margin-right: 250px;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: white;
+            color: #002147;
+            overflow-x: hidden;
+            transition: 0.3s;
+            padding-top: 60px;
+        }
+
+        .sidebar a {
+            padding: 15px 25px;
+            text-decoration: none;
+            color: #002147;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #0056a6;
+            color: white;
+        }
+
+        .sidebar .closebtn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        #openSidebarBtn {
+            position: fixed;
+            top: 8px;
+            right: 20px;
+            background-color: #002147;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            z-index: 1001;
+        }
+
+        #openSidebarBtn.hide {
+            display: none;
+        }
+
+        table {
+            width: 100%;
+            max-width: 1500px;
+            border-collapse: collapse;
+            margin: 5px auto;
+            margin-left: 150px;
+        }
+
+        th, td {
+            padding: 15px;
+            border: 1px solid #fff;
+            text-align: center;
+        }
+
+        th {
+            background-color: #002147;
+            color: white;
+        }
+
+        td {
+            background-color: #f5f5f5;
+            color: #002147;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #002147;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #00aeff;
+        }
+
+        .message {
+            text-align: center;
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Certificate Requests</h1>
+</header>
+
+<button id="openSidebarBtn" onclick="openSidebar()">☰</button>
+
+<div id="sidebar" class="sidebar" style="display: none;">
+    <span class="closebtn" onclick="closeSidebar()">&times;</span>
+    <a href="{% url 'admin_profile' %}">Profile</a>
+    <a href="{% url 'admin_homepage' %}">Homepage</a>
+    <a href="{% url 'visitor_management' %}">Manage Visitors</a>
+    <a href="{% url 'instructor_management' %}">Manage Instructors</a>
+    <a href="{% url 'admin_logout' %}">Logout</a>
+</div>
+
+<main>
+    <div class="message">
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <table>
+        <tr>
+            <th>Instructor</th>
+            <th>Student Name</th>
+            <th>University</th>
+            <th>Date Completed</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        {% for cert in requests %}
+        <tr>
+            <td>{{ cert.instructor }}</td>
+            <td>{{ cert.student_name }}</td>
+            <td>{{ cert.university_name }}</td>
+            <td>{{ cert.date_completed }}</td>
+            <td>{{ cert.status }}</td>
+            <td>
+                {% if cert.status == 'Pending' %}
+                    <form method="POST" action="{% url 'approve_certificate_request' cert.id %}" style="display:inline">
+                        {% csrf_token %}
+                        <button type="submit">Approve</button>
+                    </form>
+                    <form method="POST" action="{% url 'reject_certificate_request' cert.id %}" style="display:inline">
+                        {% csrf_token %}
+                        <button type="submit">Reject</button>
+                    </form>
+                {% endif %}
+                <form method="POST" action="{% url 'delete_certificate_request' cert.id %}" style="display:inline">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" style="text-align: center;">No certificate requests found.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</main>
+
+<script>
+    function openSidebar() {
+        document.getElementById("sidebar").style.display = "block";
+        document.getElementById("openSidebarBtn").classList.add("hide");
+    }
+
+    function closeSidebar() {
+        document.getElementById("sidebar").style.display = "none";
+        document.getElementById("openSidebarBtn").classList.remove("hide");
+    }
+</script>
+
+</body>
+</html>

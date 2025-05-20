@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generated Visitor Pages</title>
+</head>
+<body>
+    <h2>LabVIEW Visitor Pages Generated</h2>
+    <ul>
+        {% for file in generated_files %}
+            <li>{{ file }}</li>
+        {% endfor %}
+    </ul>
+    <br>
+    <a href="{% url 'homepage' %}">← Kembali ke Homepage</a>
+</body>
+</html>

@@ -1,0 +1,76 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agensi Nuklear Malaysia</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+            background-image: url("{% static 'image/1.jpeg' %}");
+            background-size: cover; 
+            background-position: top; 
+            background-repeat: no-repeat; 
+        }
+
+        h1, h2 {
+            font-size: 70px;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 40px; 
+            margin-bottom: 10px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            margin-bottom: 100px;
+        }
+
+        .button {
+            padding: 15px 30px;
+            background-color: #000000;
+            color: white;
+            font-weight: bold;
+            border: 1px solid white;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #b6bfc759;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h2>Welcome To</h2>
+    <h1>Agensi Nuklear Malaysia</h1>
+
+    <div class="button-container">
+        <a href="{% url 'admin_login' %}" class="button">Admin</a>
+        <a href="{% url 'signup' %}" class="button">Instructor</a>
+        <a href="{% url 'signup' %}" class="button">Visitor</a>
+    </div>
+
+</body>
+</html>
+{% endblock %}

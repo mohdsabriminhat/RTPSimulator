@@ -1,0 +1,160 @@
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Instructor Profile</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #002147;
+            font-family: Arial, sans-serif;
+            color: #002147;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; /* changed from flex-start to flex-end */
+            background-color: #002147;
+            padding: 14px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .topnav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .topnav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .topnav a:hover {
+            background-color: #0056a6;
+        }
+
+        .center-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-wrapper {
+            display: flex;
+            margin-right: 400px;
+            margin-bottom: 150px;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        form {
+            display: grid;
+            width: 150%;
+            max-width: 1500px;
+            background-color: #f5f5f5;
+            gap: 25px;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 20px rgb(0, 174, 255);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            color: #002147;
+            font-weight: bold;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #002147;
+            border-radius: 5px;
+            background-color: white;
+            color: #002147;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #002147;
+            color: white;
+            font-weight: bold;
+            border: 1px solid white;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0056a6;
+        }
+
+        h2 {
+            text-align: left;
+            color: white;
+            margin-bottom: 30px;
+            padding-left: 10px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="topnav">
+        <a href="{% url 'instructor_homepage' %}">Homepage</a>
+        <a href="{% url 'certificate_request_form' %}">Certificate Form</a>
+        <a href="{% url 'login' %}">Logout</a>
+    </div>
+</header>
+
+<div class="center-container">
+    <div class="form-wrapper">
+        <div style="width: 100%;">
+            <h2>Your Profile</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" name="name" value="{{ instructor.name }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" value="{{ instructor.email }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name="username" value="{{ instructor.username }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Contact</label>
+                    <input type="text" name="contact" value="{{ instructor.contact }}" required>
+                </div>
+
+                <button type="submit">Save Update Profile</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <style>
+        body {
+            background-color: #002147;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            display: flex;
+            justify-content: flex-end;
+            background-color: #002147;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .topnav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .topnav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .topnav a:hover {
+            background-color: #0056a6;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .iframe-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        iframe {
+            width: 97%;
+            height: 1000px;
+            border: none;
+            display: block;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="topnav">
+            <a href="{% url 'profile' %}">Profile</a>
+            <a href="{% url 'generate_certificate' %}" target="_blank">Certificate</a>
+            <a href="#">Feedback</a>
+            <a href="{% url 'login' %}">Logout</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="iframe-container">
+            <iframe src="http://10.10.4.58:8000/visitor3.html" width="100%" height="100%"></iframe>
+        </div>
+    </main>
+</body>
+</html>

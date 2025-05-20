@@ -1,0 +1,56 @@
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Instructor Homepage</title>
+    <style>
+        body {
+            background-color: #002147;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            display: flex;
+            justify-content: flex-end;
+            background-color: #002147;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        .topnav {
+            display: flex;
+            gap: 20px;
+        }
+        .topnav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+        .topnav a:hover {
+            background-color: #0056a6;
+        }
+        main {
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="topnav">
+        <a href="{% url 'instructor_profile' %}">Profile</a>
+        <a href="{% url 'certificate_request_form' %}">Certificate Form</a>
+        <a href="{% url 'login' %}">Logout</a>
+    </div>
+</header>
+
+<main>
+    <h1>Welcome, {{ instructor.name }}</h1>
+    <p>This is your instructor dashboard.</p>
+</main>
+
+</body>
+</html>
+{% endblock %}

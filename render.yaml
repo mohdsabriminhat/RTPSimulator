@@ -1,0 +1,12 @@
+# render.yaml
+services:
+  - type: web
+    name: django-app
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "waitress-serve --listen=0.0.0.0:$PORT RTPSIMULATOR.wsgi:application"
+    envVars:
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
