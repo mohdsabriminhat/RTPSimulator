@@ -9,7 +9,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'dummy-key-for-dev')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 # Untuk deployment — Render atau mana-mana host
-ALLOWED_HOSTS = ['RTP_Simulator.onrender.com', 'localhost', '127.0.0.1']
+#ALLOWED_HOSTS = ['RTP_Simulator.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['mohdsabriminhat.pythonanywhere.com', 'localhost', '127.0.0.1']
+
 
 # Application definition
 INSTALLED_APPS = [
@@ -86,3 +88,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+## For example, for a site URL is at 'web-production-3640.up.railway.app'
+## (replace the string below with your own site URL):
+CSRF_TRUSTED_ORIGINS = ['https://mohdsabriminhat.pythonanywhere.com']
+
+# During development/for this tutorial you can instead set just the base URL
+# CSRF_TRUSTED_ORIGINS = ['https://*.pythonanywhere.com']
